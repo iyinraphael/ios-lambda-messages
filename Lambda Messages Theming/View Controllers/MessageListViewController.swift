@@ -49,6 +49,7 @@ class MessageListViewController: UIViewController, UITableViewDelegate, UITableV
         
         cell.textLabel?.text = message.text
         cell.detailTextLabel?.text = message.sender
+        style(cell: cell)
         
         return cell
     }
@@ -71,6 +72,30 @@ class MessageListViewController: UIViewController, UITableViewDelegate, UITableV
             destinationVC.messageController = messageController
         }
     }
+    
+    func style(cell: UITableViewCell) {
+        cell.backgroundColor = Appearance.backgroundGray
+        cell.textLabel?.font = Appearance.applicationFont(with: .caption1, pointSize: 30)
+        cell.detailTextLabel?.font = Appearance.applicationFont(with: .caption2, pointSize: 25)
+        
+        //Change the size font Dynamically while app is running
+        cell.textLabel?.adjustsFontForContentSizeCategory = true
+        cell.detailTextLabel?.adjustsFontForContentSizeCategory = true
+        
+        cell.textLabel?.textColor =  .white
+        cell.detailTextLabel?.textColor = .white
+    }
+    
+    private func setTheme() {
+        view.backgroundColor = Appearance.backgroundGray
+        tableView.backgroundColor = Appearance.backgroundGray
+        tableView.tableHeaderView?.backgroundColor = Appearance.backgroundGray
+        
+        newMessageButton.setTitleColor(.white, for: .normal)
+        newMessageButton.backgroundColor = Appearance.lambdaRed
+        newMessageButton.layer.cornerRadius = newMessageButton.frame.height / 2.0
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var newMessageButton: UIButton!
     @IBOutlet weak var messageSortSegmentedControl: UISegmentedControl!
